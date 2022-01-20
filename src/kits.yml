@@ -1,0 +1,23 @@
+kits:
+  Shield:
+    helmet:
+      item: DIAMOND_HELMET
+    chestplate:
+      item: DIAMOND_CHESTPLATE
+    leggings:
+      item: DIAMOND_LEGGINGS
+    boots:
+      item: DIAMOND_BOOTS
+    offhand:
+      item: SHIELD
+    slot-0:
+      item: DIAMOND_SWORD
+    slot-1:
+      item: DIAMOND_AXE
+    slot-2:
+      item: BOW
+    slot-3:
+      item: CROSSBOW
+    slot-4:
+      item: ARROW
+      count: 10
