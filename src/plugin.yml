@@ -4,6 +4,8 @@ api-version: 1.13
 main: me.five.duels.FiveDuels
 description: Duels plugin by five
 author: five
+depend: [WorldEdit]
+softdepend: [Multiverse-Core]
 commands:
   duels:
     description: Main duels command

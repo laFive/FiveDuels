@@ -1,8 +1,10 @@
 package me.five.duels.command.impl;
 
 import me.five.duels.FiveDuels;
+import me.five.duels.arena.ArenaData;
 import me.five.duels.command.BaseCommand;
 import me.five.duels.kit.Kit;
+import me.five.duels.util.RelativeLocation;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -65,6 +67,96 @@ public class DuelsCommand extends BaseCommand {
             }
             kit.applyToPlayer(player);
             sender.sendMessage(ChatColor.GOLD + "[!] " + ChatColor.GRAY + "Kit " + name + " applied!");
+            return true;
+
+        }
+
+        if (args[0].equalsIgnoreCase("create")) {
+
+            if (!sender.hasPermission("duels.create")) {
+                printPermissionMessage(sender);
+                return true;
+            }
+
+            if (args.length < 2) {
+                printUsage(sender);
+                return true;
+            }
+
+            String name = args[1];
+            if (plugin.getArenaManager().getArenaData(name) != null) {
+                sender.sendMessage(ChatColor.GOLD + "[!] " + ChatColor.GRAY + "A map with that name already exists!");
+                return true;
+            }
+            ArenaData ad = new ArenaData(name, new RelativeLocation(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
+            ad.saveToConfig(plugin);
+            plugin.getArenaManager().createArena(ad);
+            sender.sendMessage(ChatColor.GOLD + "[!] " + ChatColor.GRAY + "Map created! Ensure you set your spawn/center locations for the map to function correctly!");
+            return true;
+
+        }
+
+        if (args[0].equalsIgnoreCase("setcenter")) {
+
+            if (!sender.hasPermission("duels.setcenter")) {
+                printPermissionMessage(sender);
+                return true;
+            }
+
+            if (args.length < 2) {
+                printUsage(sender);
+                return true;
+            }
+
+            String name = args[1];
+            ArenaData arenaData = plugin.getArenaManager().getArenaData(name);
+            if (arenaData == null) {
+                sender.sendMessage(ChatColor.GOLD + "[!] " + ChatColor.GRAY + " Unable to find a map with that name!");
+                return true;
+            }
+            arenaData.setInitialCenter(new RelativeLocation(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
+            arenaData.saveToConfig(plugin);
+            sender.sendMessage(ChatColor.GOLD + "[!] " + ChatColor.GRAY + "Center vector set!");
+            return true;
+
+        }
+
+        if (args[0].equalsIgnoreCase("setspawn")) {
+
+            if (!sender.hasPermission("duels.setspawn")) {
+                printPermissionMessage(sender);
+                return true;
+            }
+
+            if (args.length < 3) {
+                printUsage(sender);
+                return true;
+            }
+
+            String name = args[1];
+            String locationNumber = args[2];
+            int loc;
+            try {
+                loc = Integer.parseInt(locationNumber);
+            } catch (NumberFormatException ex) {
+                printUsage(sender);
+                return true;
+            }
+            ArenaData arenaData = plugin.getArenaManager().getArenaData(name);
+            if (arenaData == null) {
+                sender.sendMessage(ChatColor.GOLD + "[!] " + ChatColor.GRAY + " Unable to find a map with that name!");
+                return true;
+            }
+            if (loc == 1)
+                arenaData.setSpawnLocation1(new RelativeLocation(player.getLocation().getX() - arenaData.getInitialCenter().getRelativeX(), player.getLocation().getY() - arenaData.getInitialCenter().getRelativeY(), player.getLocation().getZ() - arenaData.getInitialCenter().getRelativeZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
+            if (loc == 2)
+                arenaData.setSpawnLocation2(new RelativeLocation(player.getLocation().getX() - arenaData.getInitialCenter().getRelativeX(), player.getLocation().getY() - arenaData.getInitialCenter().getRelativeY(), player.getLocation().getZ() - arenaData.getInitialCenter().getRelativeZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
+            if (loc != 1 && loc != 2) {
+                sender.sendMessage(ChatColor.GOLD + "[!] " + ChatColor.GRAY + "Spawn location number must be 1 or 2!");
+                return true;
+            }
+            arenaData.saveToConfig(plugin);
+            sender.sendMessage(ChatColor.GOLD + "[!] " + ChatColor.GRAY + "Spawn location set!");
             return true;
 
         }
