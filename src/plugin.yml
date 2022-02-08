@@ -4,8 +4,16 @@ api-version: 1.13
 main: me.five.duels.FiveDuels
 description: Duels plugin by five
 author: five
-depend: [WorldEdit]
-softdepend: [Multiverse-Core]
+depend: [WorldEdit, ProtocolLib]
+softdepend: [Multiverse-Core, ITrulyCore]
 commands:
   duels:
     description: Main duels command
+  leavequeue:
+    description: Leaves your current duels queue
+  spectate:
+    description: Spectate ongoing duels
+  duel:
+    description: Send a duel request to a player
+  stats:
+    description: Displays player duel stats

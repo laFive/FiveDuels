@@ -2,7 +2,7 @@ package me.five.duels.util;
 
 import org.bukkit.configuration.ConfigurationSection;
 
-public class RelativeLocation {
+public class VectorLocation {
 
     private float yaw;
     private float pitch;
@@ -10,7 +10,7 @@ public class RelativeLocation {
     private double relativeY;
     private double relativeZ;
 
-    public RelativeLocation(ConfigurationSection section) {
+    public VectorLocation(ConfigurationSection section) {
 
         relativeX = section.getDouble("RelativeX");
         relativeY = section.getDouble("RelativeY");
@@ -20,7 +20,7 @@ public class RelativeLocation {
 
     }
 
-    public RelativeLocation(double x, double y, double z, float yaw, float pitch) {
+    public VectorLocation(double x, double y, double z, float yaw, float pitch) {
         this.relativeX = x;
         this.relativeY = y;
         this.relativeZ = z;

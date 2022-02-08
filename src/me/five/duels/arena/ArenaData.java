@@ -1,8 +1,7 @@
 package me.five.duels.arena;
 
 import me.five.duels.FiveDuels;
-import me.five.duels.util.RelativeLocation;
-import org.bukkit.Location;
+import me.five.duels.util.VectorLocation;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -12,11 +11,11 @@ public class ArenaData {
 
     private String arenaName;
     private boolean allowBuilding;
-    private RelativeLocation initialCenter;
-    private RelativeLocation spawnLocation1;
-    private RelativeLocation spawnLocation2;
+    private VectorLocation initialCenter;
+    private VectorLocation spawnLocation1;
+    private VectorLocation spawnLocation2;
 
-    public ArenaData(String arenaName, RelativeLocation initialCenter) {
+    public ArenaData(String arenaName, VectorLocation initialCenter) {
         this.arenaName = arenaName;
         this.initialCenter = initialCenter;
         this.allowBuilding = true;
@@ -25,9 +24,9 @@ public class ArenaData {
     public ArenaData(YamlConfiguration arenaConfig) {
         this.arenaName = arenaConfig.getString("map-name");
         this.allowBuilding = arenaConfig.getBoolean("AllowBuilding");
-        this.initialCenter = new RelativeLocation(arenaConfig.getConfigurationSection("Center-Vector"));
-        if (arenaConfig.getConfigurationSection("Spawn-Location-1") != null) this.spawnLocation1 = new RelativeLocation(arenaConfig.getConfigurationSection("Spawn-Location-1"));
-        if (arenaConfig.getConfigurationSection("Spawn-Location-2") != null) this.spawnLocation2 = new RelativeLocation(arenaConfig.getConfigurationSection("Spawn-Location-2"));
+        this.initialCenter = new VectorLocation(arenaConfig.getConfigurationSection("Center-Vector"));
+        if (arenaConfig.getConfigurationSection("Spawn-Location-1") != null) this.spawnLocation1 = new VectorLocation(arenaConfig.getConfigurationSection("Spawn-Location-1"));
+        if (arenaConfig.getConfigurationSection("Spawn-Location-2") != null) this.spawnLocation2 = new VectorLocation(arenaConfig.getConfigurationSection("Spawn-Location-2"));
     }
 
     public void saveToConfig(FiveDuels plugin) {
@@ -47,11 +46,11 @@ public class ArenaData {
 
     }
 
-    public RelativeLocation getInitialCenter() {
+    public VectorLocation getInitialCenter() {
         return initialCenter;
     }
 
-    public void setInitialCenter(RelativeLocation initialCenter) {
+    public void setInitialCenter(VectorLocation initialCenter) {
         this.initialCenter = initialCenter;
     }
 
@@ -67,19 +66,19 @@ public class ArenaData {
         this.arenaName = arenaName;
     }
 
-    public RelativeLocation getSpawnLocation1() {
+    public VectorLocation getSpawnLocation1() {
         return spawnLocation1;
     }
 
-    public void setSpawnLocation1(RelativeLocation spawnLocation1) {
+    public void setSpawnLocation1(VectorLocation spawnLocation1) {
         this.spawnLocation1 = spawnLocation1;
     }
 
-    public RelativeLocation getSpawnLocation2() {
+    public VectorLocation getSpawnLocation2() {
         return spawnLocation2;
     }
 
-    public void setSpawnLocation2(RelativeLocation spawnLocation2) {
+    public void setSpawnLocation2(VectorLocation spawnLocation2) {
         this.spawnLocation2 = spawnLocation2;
     }
 }

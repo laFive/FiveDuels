@@ -10,6 +10,33 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../Downloads/FastAsyncWorldEdit-Bukkit-2.0.1-SNAPSHOT-72.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../APIs/ProtocolLib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Desktop/Buildtools/Spigot/Spigot-Server/target/spigot-1.18.1-R0.1-SNAPSHOT-remapped.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
           <root url="jar://$MODULE_DIR$/../../APIs/spigot-1.17.1.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -21,7 +48,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../Downloads/FastAsyncWorldEdit-Bukkit-2.0.1-SNAPSHOT-72.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../Test server 1.18/plugins/ITrulyCore.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -18,7 +18,7 @@ public class KitManager {
         loadedKits = new HashMap<>();
         this.kitsFile = kitsFile;
         this.kitsFileLocation = kitsFileLocation;
-        kitsFile.getConfigurationSection("kits").getKeys(false).forEach(kit -> loadedKits.put(kit, new Kit(kitsFile.getConfigurationSection("kits." + kit))));
+        kitsFile.getConfigurationSection("kits").getKeys(false).forEach(kit -> loadedKits.put(kit, new Kit(kitsFile.getConfigurationSection("kits." + kit)).setName(kit)));
 
     }
 
@@ -28,6 +28,7 @@ public class KitManager {
 
     public void addKit(String name, Kit kit) {
         loadedKits.put(name, kit);
+        kitsFile.set("kits", null);
         kit.saveToConfig(kitsFile.createSection("kits." + name));
         try {
             kitsFile.save(kitsFileLocation);

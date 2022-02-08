@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Kit {
 
+    private String name;
     private ItemStack offhand;
     private ItemStack helmet;
     private ItemStack chestplate;
@@ -134,4 +135,12 @@ public class Kit {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Kit setName(String name) {
+        this.name = name;
+        return this;
+    }
 }

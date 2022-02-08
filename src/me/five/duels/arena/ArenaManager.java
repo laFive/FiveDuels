@@ -4,13 +4,17 @@ import me.five.duels.FiveDuels;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Stream;
 
 public class ArenaManager {
 
+    private Random random;
     private FiveDuels plugin;
     private World arenaWorld;
     private List<Arena> loadedArenas;
@@ -20,9 +24,10 @@ public class ArenaManager {
     public ArenaManager(FiveDuels plugin) {
 
         this.plugin = plugin;
+        this.random = new Random();
         this.arenaData = new ArrayList<>();
         this.loadedArenas = new ArrayList<>();
-        this.arenaWorld = Bukkit.getWorld("DuelsGames") == null ? Bukkit.getWorlds().get(0) : Bukkit.getWorld("DuelsGames");
+        this.arenaWorld = Bukkit.getWorld("DuelsGames");
 
     }
 
@@ -37,32 +42,38 @@ public class ArenaManager {
 
         int offset = 500;
         for (ArenaData ad : arenaData) {
-            if (ad.getInitialCenter() == null || ad.getSpawnLocation1() == null || ad.getSpawnLocation2() == null) {
-                if (ad.getInitialCenter() == null) {
-                    plugin.getLogger().info("trol retge ");
-                }
-                if (ad.getSpawnLocation1() == null) {
-                    plugin.getLogger().info("trol fweqfwq ");
-                }
-                if (ad.getSpawnLocation2() == null) {
-                    plugin.getLogger().info("fefe retge ");
-                }
-                continue;
-            }
+            if (ad.getInitialCenter() == null || ad.getSpawnLocation1() == null || ad.getSpawnLocation2() == null) continue;
             if (!new File(plugin.getDataFolder() + "/schematics/" + ad.getArenaName() + ".schem").exists()) {
-                plugin.getLogger().info("hahahahahahahahah " + ad.getArenaName());
                 plugin.getLogger().info(ad.getArenaName());
                 continue;
             }
-            for (int i = 0; i <= 50; i++) {
+            for (int i = 0; i <= 25; i++) {
                 loadedArenas.add(new Arena(ad, offset, plugin));
                 offset += 250;
             }
         }
     }
 
+    public Arena getRandomArena() {
+
+        List<Arena> validArenas = loadedArenas.stream().filter(arena -> !arena.isDuelCreated()).toList();
+        if (validArenas.isEmpty()) return null;
+        return validArenas.get(random.nextInt(validArenas.size()));
+
+    }
+
+    public boolean isInArena(Player player) {
+
+        return loadedArenas.stream().anyMatch(arena -> arena.isDuelCreated() && arena.getPlayers().contains(player));
+
+    }
+
     public World getArenaWorld() {
         return arenaWorld;
+    }
+
+    public List<Arena> getLoadedArenas() {
+        return loadedArenas;
     }
 
     public void createArena(ArenaData ad) {
