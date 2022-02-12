@@ -3,6 +3,7 @@ package me.five.duels;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import me.five.duels.api.DuelsAPI;
 import me.five.duels.arena.ArenaManager;
+import me.five.duels.brackets.BracketsManager;
 import me.five.duels.command.impl.*;
 import me.five.duels.data.DataManager;
 import me.five.duels.kit.KitManager;
@@ -23,6 +24,7 @@ public class FiveDuels extends JavaPlugin {
     private DataManager dataManager;
     private ArenaManager arenaManager;
     private QueueManager queueManager;
+    private BracketsManager bracketsManager;
     private ExecutorService executorService;
 
     @Override
@@ -33,6 +35,7 @@ public class FiveDuels extends JavaPlugin {
         kitManager = new KitManager(YamlConfiguration.loadConfiguration(kitsFile), kitsFile);
         dataManager = new DataManager(this);
         queueManager = new QueueManager(this);
+        bracketsManager = new BracketsManager(this);
         DuelsAPI.setPlugin(this);
         executorService = Executors.newSingleThreadExecutor(new ThreadFactoryBuilder().setNameFormat("FAWE-FiveDuels-Thread").build());
         arenaManager = new ArenaManager(this);
@@ -66,6 +69,10 @@ public class FiveDuels extends JavaPlugin {
 
     public ArenaManager getArenaManager() {
         return arenaManager;
+    }
+
+    public BracketsManager getBracketsManager() {
+        return bracketsManager;
     }
 
     public DataManager getDataManager() {

@@ -5,6 +5,7 @@ import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats;
 import com.sk89q.worldedit.math.BlockVector3;
 import me.five.duels.FiveDuels;
+import me.five.duels.brackets.Brackets;
 import me.five.duels.kit.Kit;
 import me.five.duels.util.ArenaUtil;
 import me.five.duels.util.PacketUtil;
@@ -55,6 +56,7 @@ public class Arena {
     private List<Player> players;
     private List<Player> spectators;
     private List<VectorLocation> playerBlocks;
+    private Brackets brackets;
 
     public Arena(ArenaData data, int offset, FiveDuels plugin) {
 
@@ -66,6 +68,21 @@ public class Arena {
         this.players = new ArrayList<>();
         this.spectators = new ArrayList<>();
         this.playerBlocks = new ArrayList<>();
+        pasteSchematic();
+
+    }
+
+    public Arena(ArenaData data, int offset, FiveDuels plugin, Brackets brackets) {
+
+        this.mapName = data.getArenaName();
+        this.allowBuilding = data.isAllowBuilding();
+        this.offset = offset;
+        this.plugin = plugin;
+        this.data = data;
+        this.players = new ArrayList<>();
+        this.spectators = new ArrayList<>();
+        this.playerBlocks = new ArrayList<>();
+        this.brackets = brackets;
         pasteSchematic();
 
     }
@@ -148,6 +165,10 @@ public class Arena {
 
     }
 
+    public void bracketsEnd() {
+        if (brackets != null && created) endDuel(players.get(0));
+    }
+
     public void tick() {
 
         if (players.size() == 0 || !created) return;
@@ -205,6 +226,7 @@ public class Arena {
                 created = false;
                 spectators.clear();
                 players.clear();
+                brackets = null;
 
             }
 

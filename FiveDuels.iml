@@ -10,15 +10,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../Downloads/FastAsyncWorldEdit-Bukkit-2.0.1-SNAPSHOT-72.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/../../APIs/ProtocolLib.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -48,7 +39,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Test server 1.18/plugins/ITrulyCore.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/FastAsyncWorldEdit-Bukkit-2.0.2-SNAPSHOT-91.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../Test Server 1.18.1/plugins/ITrulyCore.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
