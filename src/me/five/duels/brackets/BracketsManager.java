@@ -1,6 +1,8 @@
 package me.five.duels.brackets;
 
 import me.five.duels.FiveDuels;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class BracketsManager {
@@ -18,6 +20,10 @@ public class BracketsManager {
 
     public void createBrackets(Player host, int playerLimit, boolean build) {
         brackets = new Brackets(playerLimit, host, build, fiveDuels);
+        Bukkit.broadcastMessage(ChatColor.DARK_GRAY + "-------------------------------------------");
+        Bukkit.broadcastMessage(ChatColor.DARK_AQUA + host.getName() + ChatColor.GRAY + " is hosting a duels brackets event!");
+        Bukkit.broadcastMessage(ChatColor.GRAY + "Click " + ChatColor.DARK_AQUA + " here " + ChatColor.GRAY + "to join!");
+        Bukkit.broadcastMessage(ChatColor.DARK_GRAY + "-------------------------------------------");
     }
 
     public void createBrackets(Player player) {

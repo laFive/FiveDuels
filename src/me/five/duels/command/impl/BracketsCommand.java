@@ -38,7 +38,7 @@ public class BracketsCommand extends BaseCommand {
             return true;
         }
 
-        MenuUtil.openPlayerLimitMenu((Player)sender);
+        MenuUtil.openPlayerLimitMenu((Player)sender, plugin);
         return true;
     }
 }

@@ -1,5 +1,6 @@
 package me.five.duels.util;
 
+import me.five.duels.FiveDuels;
 import me.five.itrulyevents.core.menu.Menu;
 import me.five.itrulyevents.core.menu.MenuButton;
 import org.bukkit.ChatColor;
@@ -11,7 +12,7 @@ import java.util.function.Consumer;
 
 public class MenuUtil {
 
-    public static void openPlayerLimitMenu(Player player) {
+    public static void openPlayerLimitMenu(Player player, FiveDuels plugin) {
         Menu playerLimitMenu = new Menu(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + "Select player limit", 4);
         for (int i = 0; i < 36; i++) {
             playerLimitMenu.setMenuButton(i, new MenuButton(new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE), ChatColor.BLUE.toString()));
@@ -20,7 +21,7 @@ public class MenuUtil {
         eightButton.setWhenClicked(new Consumer<Player>() {
             @Override
             public void accept(Player player) {
-                openBuildingMenu(player, 8);
+                openBuildingMenu(player, 8, plugin);
                 return;
             }
         });
@@ -28,7 +29,7 @@ public class MenuUtil {
         sixteenButton.setWhenClicked(new Consumer<Player>() {
             @Override
             public void accept(Player player) {
-                openBuildingMenu(player, 16);
+                openBuildingMenu(player, 16, plugin);
                 return;
             }
         });
@@ -36,7 +37,7 @@ public class MenuUtil {
         thirtyTwoButton.setWhenClicked(new Consumer<Player>() {
             @Override
             public void accept(Player player) {
-                openBuildingMenu(player, 32);
+                openBuildingMenu(player, 32, plugin);
                 return;
             }
         });
@@ -44,7 +45,7 @@ public class MenuUtil {
         noLimitButton.setWhenClicked(new Consumer<Player>() {
             @Override
             public void accept(Player player) {
-                openBuildingMenu(player, Integer.MAX_VALUE);
+                openBuildingMenu(player, Integer.MAX_VALUE, plugin);
                 return;
             }
         });
@@ -64,7 +65,7 @@ public class MenuUtil {
         playerLimitMenu.openMenu(player);
     }
 
-    public static void openBuildingMenu(Player player, int playerLimit) {
+    public static void openBuildingMenu(Player player, int playerLimit, FiveDuels plugin) {
 
         Menu allowBuilding = new Menu(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + "Allow Building", 4);
         for (int i = 0; i < 36; i++) {
@@ -74,7 +75,7 @@ public class MenuUtil {
         denyButton.setWhenClicked(new Consumer<Player>() {
             @Override
             public void accept(Player player) {
-
+                plugin.getBracketsManager().createBrackets(player, playerLimit, false);
                 return;
             }
         });
@@ -82,7 +83,7 @@ public class MenuUtil {
         allowButton.setWhenClicked(new Consumer<Player>() {
             @Override
             public void accept(Player player) {
-
+                plugin.getBracketsManager().createBrackets(player, playerLimit, true);
                 return;
             }
         });
